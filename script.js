@@ -26,7 +26,7 @@ function generatePassword() {
 
 
 
-  if (passwordLength < 8 || passwordLength > 128 || typeof passwordLength != "number") {
+  if (passwordLength < 8 || passwordLength > 128) {
     alert("invalid!");
     return;
   }
