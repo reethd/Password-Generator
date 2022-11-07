@@ -14,18 +14,24 @@ function writePassword() {
   passwordText.value = password;
 }
 
+
 function generatePassword() {
   var charList = "";
+  var genPassword = "";
 
-  var passwordLength = prompt(
+  // Creates prompt for user to enter required password length, returns invalid if too big, small or a non-number is entered
+  passwordLength = prompt(
     `Enter password length (must be between 8 and 128 characters)`
   );
 
-  if (passwordLength < 8 || passwordLength > 128) {
+
+
+  if (passwordLength < 8 || passwordLength > 128 || typeof passwordLength != "number") {
     alert("invalid!");
     return;
   }
 
+  //Prompts user for password parameters
   var isLowerCase = confirm(
     "Click OK if password requires lowercase characters"
   );
@@ -54,7 +60,18 @@ function generatePassword() {
     charList += charSpecial;
   }
 
-  return charList;
+
+  //Randomly selects approved characters for user determined length of password, returns error if no parameters selected
+  for (i=0;i<passwordLength;i++){
+    genPassword += charList.charAt(Math.floor(Math.random() * charList.length))
+  }
+
+  if (genPassword == ""){
+    var error = "error!";
+    return error;
+  }
+
+  return genPassword;
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
